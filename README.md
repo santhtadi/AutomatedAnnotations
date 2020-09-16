@@ -46,6 +46,7 @@ The original video can be found at https://www.videezy.com/abstract/41648-elepha
 python3 automated_annotation.py -i input_video.mp4 -s annotations_newer -n 10 -o 5
 ```
 The arguments are:
+
 -i -> input video name
 
 -s -> the annotations folder where two folders called images/ and annotations/ are created to store the annotations
@@ -56,7 +57,7 @@ The arguments are:
 
 ## Steps:
 
-1. The first frame is paused, simply click on the image displayed in the window titled "Automated Labelling".
+1. The first frame is paused, simply click on the image displayed in the window titled "Automated Labelling", click and drag on the object to annotate.
 
 2. Now click on the key 'p' on keyboard, the tracked object is displayed in green rectangle
 
