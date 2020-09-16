@@ -1,2 +1,2 @@
 # AutomatedAnnotations
-Create annotations automatically from videos
+Create annotations automatically from videos and save them in YOLO format
