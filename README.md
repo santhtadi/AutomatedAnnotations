@@ -1,5 +1,5 @@
 # AutomatedAnnotations
-Create annotations automatically from videos and save them in YOLO format
+Create annotations automatically from videos and save them in YOLO object detection format
 
 # Description
 
@@ -9,7 +9,7 @@ Create annotations automatically from videos and save them in YOLO format
 
 **2. There is only one object of the class in the video**
 
-The output format of annotations is in YOLO Format
+The output format of annotations is in YOLO object detection Format
 
 ```
 class_id center_x center_y width height
