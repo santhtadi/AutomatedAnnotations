@@ -28,7 +28,7 @@ The demo video used contains an Elephant walking around.
 
 The original video can be found at https://www.videezy.com/abstract/41648-elephant-walking-in-cage-at-zoo-4k
 
-![](read_me_files/elephant_annotation_demo.gif)
+![](elephant_annotation_demo.gif)
 
 ## Command Prompt Commands
 
