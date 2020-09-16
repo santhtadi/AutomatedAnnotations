@@ -58,6 +58,7 @@ def draw_annotation(event, x, y, flags, params):
         dragging = False
         # store the points in a variable
         points = [temp_start_point[0], temp_start_point[1], x, y]
+        # make temp_start_point list empty
         temp_start_point = []
         # enable tracking
         tracking = True
