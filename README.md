@@ -10,7 +10,7 @@ Create annotations automatically from videos and save them in YOLO format
 **2. There is only one object of the class in the video**
 
 
-The project is created using the correlation tracker of (dlib)[http://dlib.net/]
+The project is created using the correlation tracker of [dlib](http://dlib.net/)
 
 
 I used opencv to both interact with and display the bounding boxes of the object in the video
@@ -28,7 +28,7 @@ The demo video used contains an Elephant walking around.
 
 The original video can be found at https://www.videezy.com/abstract/41648-elephant-walking-in-cage-at-zoo-4k
 
-![](elephant_annotation_demo.gif)
+![demo gif](elephant_annotation_demo.gif)
 
 ## Command Prompt Commands
 
