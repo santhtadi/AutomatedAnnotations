@@ -9,6 +9,16 @@ Create annotations automatically from videos and save them in YOLO format
 
 **2. There is only one object of the class in the video**
 
+The output format of annotations is in YOLO Format
+
+```
+class_id center_x center_y width height
+```
+
+Each bounding box is represented in the above format. All coordinates are in normalized representation (divided by width and height of the image)
+
+Each image contains each bounding box in the above format in a new line
+
 
 The project is created using the correlation tracker of [dlib](http://dlib.net/)
 
