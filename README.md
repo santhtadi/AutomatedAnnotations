@@ -75,7 +75,9 @@ The arguments are:
 
 **(only for multiple classes)**
 
--c -> classes that are separated by ',', example:
+-c -> classes that are separated by ',' 
+
+Example:
 
 ```
 python automated_multi_class_annotation.py -i Elephant.mp4 -c elephant,tree -s annotations_test -n 10
