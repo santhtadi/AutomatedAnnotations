@@ -3,11 +3,21 @@ Create annotations automatically from videos and save them in YOLO object detect
 
 # Description
 
+This project has two scripts "automated_annotation.py" and "automated_multi_class_annotation.py"
+
+## Single Class annotation (automated_annotation.py)
+
 **This python script works only when:**
 
 **1. There is only one class**
 
 **2. There is only one object of the class in the video**
+
+## Multiple Class annotation (automated_multi_class_annotation.py)
+
+**User can interact with the script using command prompt**
+
+
 
 The output format of annotations is in YOLO object detection Format
 
@@ -38,7 +48,15 @@ The demo video used contains an Elephant walking around.
 
 The original video can be found at https://www.videezy.com/abstract/41648-elephant-walking-in-cage-at-zoo-4k
 
+**single class annotation**
+
 ![demo gif](elephant_annotation_demo.gif)
+
+
+**multiple class annotation**
+
+![multi_demo_gif](multi_tracking_demo.gif)
+
 
 ## Command Prompt Commands
 
@@ -55,21 +73,30 @@ The arguments are:
 
 -o -> the starting of the sequence number so that mixing the datasets become easier
 
+**(only for multiple classes)**
+
+-c -> classes that are separated by ',', example:
+
+```
+python automated_multi_class_annotation.py -i Elephant.mp4 -c elephant,tree -s annotations_test -n 10
+```
+
 ## Steps:
 
-1. The first frame is paused, simply click on the image displayed in the window titled "Automated Labelling", click and drag on the object to annotate.
+1. The first frame is paused, simply click on the image displayed in the window titled "Automated Labelling", click and drag on the object to annotate. 
 
-2. Now click on the key 'p' on keyboard, the tracked object is displayed in green rectangle
+2. (for multiple class only, skip if you want to try single class object annotation) 
 
-3. When the tracking becomes inaccurate, click on the key 'p' on the keyboard again
+Enter the name of the class in command prompt if you are using the multi class annotation script, and repeat the drag and annotate process.
 
-4. Draw the updated bounding box
+3. Now click on the key 'p' on keyboard, the tracked object is displayed in green rectangle
 
-5. Press the key 'p' on keyboard to continue tracking
+4. When the tracking becomes inaccurate, click on the key 'p' on the keyboard again
 
-# Next Steps
+5. Draw the updated bounding box
 
-1. Enable multiple objects tracking feature
+6. update the class names in case of multiple object tracking 
 
-2. Enable usage of multiple classes
+7. Press the key 'p' on keyboard to continue tracking
 
+8. press 'q' to stop the script
