@@ -98,4 +98,4 @@ Enter the name of the class in command prompt if you are using the multi class a
 
 7. Press the key 'p' on keyboard to continue tracking
 
-8. press 'q' to stop the script
+8. press 'q' to stop the script execution.
