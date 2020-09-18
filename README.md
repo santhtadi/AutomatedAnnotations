@@ -86,7 +86,6 @@ python automated_multi_class_annotation.py -i Elephant.mp4 -c elephant,tree -s a
 1. The first frame is paused, simply click on the image displayed in the window titled "Automated Labelling", click and drag on the object to annotate. 
 
 2. (for multiple class only, skip if you want to try single class object annotation) 
-
 Enter the name of the class in command prompt if you are using the multi class annotation script, and repeat the drag and annotate process.
 
 3. Now click on the key 'p' on keyboard, the tracked object is displayed in green rectangle
