@@ -152,6 +152,7 @@ def main():
                 dlib_tracker = dlib.correlation_tracker()
                 cv2.imshow("Automated Labelling", frame)
                 assigned = False
+                tracking = False
             else:
                 timer = 1
                 paused = False
