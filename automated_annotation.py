@@ -149,6 +149,7 @@ def main():
                 timer = 0
                 paused = True
                 print("paused at: ", save_counter)
+                dlib_tracker = dlib.correlation_tracker()
                 cv2.imshow("Automated Labelling", frame)
                 assigned = False
             else:
