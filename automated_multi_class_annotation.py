@@ -15,7 +15,7 @@ parser.add_argument("-n", "--save_every", type=int, default=10,
 parser.add_argument("-o", "--start_number", type=int, default=0,
                     help="Starting number of the annotations naming sequence", required=False)
 parser.add_argument("-c", "--classes", required=True, default="object", help="the class names separataed by ','")
-parser.add_argument("-w", "--width", type=int, required=False, default=600, help="the width of the window")
+parser.add_argument("-w", "--width", type=int, required=False, default=800, help="the width of the window")
 parser.add_argument("--small_object", type=float, default=0.1,
                     help="threshold for small object, the lower the value, the smaller the object")
 args = parser.parse_args()
