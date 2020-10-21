@@ -55,7 +55,7 @@ The original video can be found at https://www.videezy.com/abstract/41648-elepha
 
 **multiple class annotation**
 
-![multi_demo_gif](./multi_tracking_demo.gif)
+![multi_demo_gif](multi_tracking_demo.gif)
 
 
 ## Command Prompt Commands
