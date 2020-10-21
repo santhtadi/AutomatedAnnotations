@@ -55,7 +55,7 @@ The original video can be found at https://www.videezy.com/abstract/41648-elepha
 
 **multiple class annotation**
 
-![multi_demo_gif](multi_tracking_demo.gif)
+![multi_demo_gif](./multi_tracking_demo.gif)
 
 
 ## Command Prompt Commands
@@ -72,6 +72,8 @@ The arguments are:
 -n -> every n-th frame of the video is saved in the annotations folder
 
 -o -> the starting of the sequence number so that mixing the datasets become easier
+
+-w -> width of the window (default=800px)
 
 **(only for multiple classes)**
 
@@ -94,10 +96,12 @@ Enter the name of the class in command prompt if you are using the multi class a
 
 4. When the tracking becomes inaccurate, click on the key 'p' on the keyboard again
 
-5. Draw the updated bounding box
+5. Double-click right mouse button to delete the bounding box
 
-6. update the class names in case of multiple object tracking 
+6. Draw the updated bounding box
 
-7. Press the key 'p' on keyboard to continue tracking
+7. Select the class names in popup box in case of multiple object tracking 
 
-8. press 'q' to stop the script execution.
+8. Press the key 'p' on keyboard to continue tracking
+
+9. Press 'q' to stop the script execution.
