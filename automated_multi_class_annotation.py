@@ -37,7 +37,8 @@ idx_trackers = {}
 
 # save colors as a dictionary to use later in algorithms
 color = {"track": (0, 255, 0),
-         "text": (0, 0, 0)}
+         "text": (0, 0, 0),
+         "line": (150, 255, 180)}
 
 # parse and save the command line arguments
 save_counter = args.start_number
@@ -81,7 +82,7 @@ def area_of(points, shape):
     global small_thresh
     h, w, _ = shape
     x1, y1, x2, y2 = points
-    return (y2 - y1) * (x2 - x1) > (w * h) * small_thresh/100
+    return (y2 - y1) * (x2 - x1) > (w * h) * small_thresh / 100
 
 
 # the call back function of cv2 window
@@ -99,6 +100,10 @@ def draw_annotation(event, x, y, flags, params):
             cv2.putText(temp_frame, key, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color["text"], thickness=2)
             if x1 < x < x2 and y1 < y < y2:
                 temp_frame[y1:y2, x1:x2, 0] = np.array([[190] * temp_box.shape[1]] * temp_box.shape[0])
+    if not tracking:
+        h, w, _ = temp_frame.shape
+        cv2.line(temp_frame, (x, 0), (x, h), color["line"])
+        cv2.line(temp_frame, (0, y), (w, y), color["line"])
     cv2.imshow(window_name, temp_frame)
     # if a rectangle is double clicked, the bounding box is deleted
     if event == cv2.EVENT_RBUTTONDBLCLK:
@@ -134,7 +139,7 @@ def draw_annotation(event, x, y, flags, params):
         else:
             temp_start_point = []
             # enable tracking
-            tracking = True
+            # tracking = True
             # get class from a dialog box dropdown
             cls = select_class_name(classes)
             # append bounding box to all bounding boxes
@@ -215,9 +220,11 @@ def main():
                 print("paused at: ", save_counter)
                 cv2.imshow(window_name, frame)
                 assigned = False
+                tracking = False
             else:
                 timer = 1
                 paused = False
+                tracking = True
                 # delete all trackers and will be reinitialized with object positions
                 delete_trackers = [w for w in idx_trackers.keys()]
                 for tracker in delete_trackers:
