@@ -90,6 +90,15 @@ def area_of(points, shape):
     return (y2 - y1) * (x2 - x1) > (w * h) * small_thresh / 100
 
 
+def get_points_order(pts):
+    res = [0] * 4
+    res[0] = min((pts[0], pts[2]))
+    res[1] = min((pts[1], pts[3]))
+    res[2] = max((pts[0], pts[2]))
+    res[3] = max((pts[1], pts[3]))
+    return res
+
+
 # the call back function of cv2 window
 def draw_annotation(event, x, y, flags, params):
     global dragging, temp_start_point, frame, tracking, save_counter, classes
@@ -150,7 +159,7 @@ def draw_annotation(event, x, y, flags, params):
             # append bounding box to all bounding boxes
             if cls not in all_bounding_boxes:
                 all_bounding_boxes[cls] = []
-            all_bounding_boxes[cls].append(points)
+            all_bounding_boxes[cls].append(get_points_order(points))
     elif not tracking:
         # here we continuously update the frame with the bounding box
         if dragging:
