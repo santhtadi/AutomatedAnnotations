@@ -147,6 +147,7 @@ def draw_annotation(event, x, y, flags, params):
         dragging = False
         # store the points in a variable
         points = [temp_start_point[0], temp_start_point[1], x, y]
+        points = get_points_order(points)
         # check if the small object thresh condition is satisfied
         if not area_of(points, temp_frame.shape):
             pass
@@ -159,7 +160,7 @@ def draw_annotation(event, x, y, flags, params):
             # append bounding box to all bounding boxes
             if cls not in all_bounding_boxes:
                 all_bounding_boxes[cls] = []
-            all_bounding_boxes[cls].append(get_points_order(points))
+            all_bounding_boxes[cls].append(points)
     elif not tracking:
         # here we continuously update the frame with the bounding box
         if dragging:
