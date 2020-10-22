@@ -79,9 +79,11 @@ The arguments are:
 
 --small_object -> threshold for small object, the lower the value, the smaller the object
 
---frame_delay -> delay between two consecutive frames in ms
+--frame_delay -> delay between two consecutive frames in ms (default = 1)
 
---start_frame -> starting frame in the video
+--start_frame -> starting frame in the video (default = 1)
+
+--skip_frames -> number of frames to skip (default = 1)
 
 -c -> classes that are separated by ',' 
 

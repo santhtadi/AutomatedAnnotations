@@ -21,6 +21,7 @@ parser.add_argument("--small_object", type=float, default=0.1,
 parser.add_argument("--frame_delay", type=int, default=1,
                     help="delay between two consecutive frames in ms")
 parser.add_argument("--start_frame", default=0, type=int, required=False, help="starting frame in the video")
+parser.add_argument("--skip_frames", default=1, type=int, required=False, help="number of frames to skip")
 args = parser.parse_args()
 
 print("Note: Please try to set the number of object trackers as per your system configuration")
@@ -52,6 +53,7 @@ opencv_window_width = args.width
 small_thresh = args.small_object
 time_delay = args.frame_delay
 start_pos = args.start_frame
+skip_frames = args.skip_frames
 
 # create the number of classes from command line arguments
 classes = args.classes.split(',')
@@ -124,6 +126,7 @@ def draw_annotation(event, x, y, flags, params):
         delete_this = {}
         # iterate over bounding boxes to identify the box selected
         for key, val in all_bounding_boxes.items():
+            deleted = False
             for i, v in enumerate(val):
                 x1, y1, x2, y2 = v
                 # check click condition
@@ -131,7 +134,10 @@ def draw_annotation(event, x, y, flags, params):
                     if key not in delete_this:
                         delete_this[key] = []
                     delete_this[key].append(i)
+                    deleted = True
                     break
+            if deleted:
+                break
         # delete from dictionary separately as dictionary cannot be altered during a loop
         for key, val in delete_this.items():
             for i in val:
@@ -176,7 +182,8 @@ def main():
     # add the callback function
     cv2.setMouseCallback(window_name, draw_annotation)
     # define the global variables
-    global frame, tracking, idx_trackers, start_pos, save_counter, input_vid, save_every, save_path, opencv_window_width, time_delay
+    global frame, tracking, idx_trackers, start_pos, save_counter, input_vid, save_every, save_path, opencv_window_width
+    global skip_frames, time_delay
     # initialize video capture
     cap = cv2.VideoCapture(input_vid)
     cap.set(cv2.CAP_PROP_POS_FRAMES, start_pos)
@@ -276,7 +283,9 @@ def main():
                 # increment the save counter
                 save_counter += 1
         # read the next frame
-        ret, frame = cap.read()
+        for _ in range(skip_frames):
+            ret, frame = cap.read()
+            save_counter += 1
 
 
 if __name__ == "__main__":
