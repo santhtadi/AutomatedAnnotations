@@ -77,12 +77,18 @@ The arguments are:
 
 **(only for multiple classes)**
 
+--small_object -> threshold for small object, the lower the value, the smaller the object
+
+--frame_delay -> delay between two consecutive frames in ms
+
+--start_frame -> starting frame in the video
+
 -c -> classes that are separated by ',' 
 
 Example:
 
 ```
-python automated_multi_class_annotation.py -i Elephant.mp4 -c elephant,tree -s annotations_test -n 10
+python automated_multi_class_annotation.py -i Elephant.mp4 -c "elephant,tree" -s annotations_test -n 10
 ```
 
 ## Steps:
