@@ -20,6 +20,7 @@ parser.add_argument("--small_object", type=float, default=0.1,
                     help="threshold for small object, the lower the value, the smaller the object")
 parser.add_argument("--frame_delay", type=int, default=1,
                     help="delay between two consecutive frames in ms")
+parser.add_argument("--start_frame", default=0, type=int, required=False, help="starting frame in the video")
 args = parser.parse_args()
 
 print("Note: Please try to set the number of object trackers as per your system configuration")
@@ -50,6 +51,7 @@ save_path = args.save_path
 opencv_window_width = args.width
 small_thresh = args.small_object
 time_delay = args.frame_delay
+start_pos = args.start_frame
 
 # create the number of classes from command line arguments
 classes = args.classes.split(',')
@@ -109,7 +111,7 @@ def draw_annotation(event, x, y, flags, params):
         cv2.line(temp_frame, (0, y), (w, y), color["line"])
     cv2.imshow(window_name, temp_frame)
     # if a rectangle is double clicked, the bounding box is deleted
-    if event == cv2.EVENT_RBUTTONDBLCLK:
+    if event == cv2.EVENT_RBUTTONDBLCLK and not tracking:
         delete_this = {}
         # iterate over bounding boxes to identify the box selected
         for key, val in all_bounding_boxes.items():
@@ -126,12 +128,12 @@ def draw_annotation(event, x, y, flags, params):
             for i in val:
                 del all_bounding_boxes[key][i]
     # the dragging feature is enabled and the top xy coords of the image are added to a local variable
-    if event == cv2.EVENT_LBUTTONDOWN:
+    if event == cv2.EVENT_LBUTTONDOWN and not tracking:
         print("recog lbutton down")
         dragging = True
         temp_start_point = [x, y]
     # check if drawing the bounding box is done
-    elif event == cv2.EVENT_LBUTTONUP:
+    elif event == cv2.EVENT_LBUTTONUP and not tracking:
         # disable drawing
         dragging = False
         # store the points in a variable
@@ -149,7 +151,7 @@ def draw_annotation(event, x, y, flags, params):
             if cls not in all_bounding_boxes:
                 all_bounding_boxes[cls] = []
             all_bounding_boxes[cls].append(points)
-    else:
+    elif not tracking:
         # here we continuously update the frame with the bounding box
         if dragging:
             if len(temp_start_point) > 0:
@@ -164,9 +166,10 @@ def main():
     # add the callback function
     cv2.setMouseCallback(window_name, draw_annotation)
     # define the global variables
-    global frame, tracking, idx_trackers, save_counter, input_vid, save_every, save_path, opencv_window_width, time_delay
+    global frame, tracking, idx_trackers, start_pos, save_counter, input_vid, save_every, save_path, opencv_window_width, time_delay
     # initialize video capture
     cap = cv2.VideoCapture(input_vid)
+    cap.set(cv2.CAP_PROP_POS_FRAMES, start_pos)
     print(input_vid)
     # read the first frame
     ret, frame = cap.read()
