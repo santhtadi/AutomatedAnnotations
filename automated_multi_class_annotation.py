@@ -18,6 +18,8 @@ parser.add_argument("-c", "--classes", required=True, default="object", help="th
 parser.add_argument("-w", "--width", type=int, required=False, default=800, help="the width of the window")
 parser.add_argument("--small_object", type=float, default=0.1,
                     help="threshold for small object, the lower the value, the smaller the object")
+parser.add_argument("--frame_delay", type=int, default=1,
+                    help="delay between two consecutive frames in ms")
 args = parser.parse_args()
 
 print("Note: Please try to set the number of object trackers as per your system configuration")
@@ -47,6 +49,7 @@ input_vid = args.input_video
 save_path = args.save_path
 opencv_window_width = args.width
 small_thresh = args.small_object
+time_delay = args.frame_delay
 
 # create the number of classes from command line arguments
 classes = args.classes.split(',')
@@ -161,14 +164,12 @@ def main():
     # add the callback function
     cv2.setMouseCallback(window_name, draw_annotation)
     # define the global variables
-    global frame, tracking, idx_trackers, save_counter, input_vid, save_every, save_path, opencv_window_width
+    global frame, tracking, idx_trackers, save_counter, input_vid, save_every, save_path, opencv_window_width, time_delay
     # initialize video capture
     cap = cv2.VideoCapture(input_vid)
     print(input_vid)
     # read the first frame
     ret, frame = cap.read()
-    # resize ratio is used so that the frame doesn't get too big
-    resize_ratio = 1.0
     H, W, _ = frame.shape
     # define resize ratio so that the width is frame_width
     resize_ratio = opencv_window_width / W
@@ -222,7 +223,7 @@ def main():
                 assigned = False
                 tracking = False
             else:
-                timer = 1
+                timer = time_delay
                 paused = False
                 tracking = True
                 # delete all trackers and will be reinitialized with object positions
