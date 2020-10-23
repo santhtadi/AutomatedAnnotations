@@ -55,10 +55,11 @@ time_delay = args.frame_delay
 start_pos = args.start_frame
 skip_frames = args.skip_frames
 # warning if save_every%skip_frames != 0 then they may never coincide
-if save_every % skip_frames != 0 or save_counter%skip_frames!=0:
-    raise AssertionError("\n1. please make sure the skip_frames is a factorial of save_every_frame(n) to avoid errors while saving images\n"+
-                         "for example: n=10 and skip_frames=2 will work but n=10 and skip_frames=3 will not work very well\n"
-                         "2. Please make sure the skip_frames is a factorial of start_number(o)\n")
+if save_every % skip_frames != 0 or save_counter % skip_frames != 0:
+    raise AssertionError(
+        "\n1. please make sure the skip_frames is a factorial of save_every_frame(n) to avoid errors while saving images\n" +
+        "for example: n=10 and skip_frames=2 will work but n=10 and skip_frames=3 will not work very well\n"
+        "2. Please make sure the skip_frames is a factorial of start_number(o)\n")
 # create the number of classes from command line arguments
 classes = args.classes.split(',')
 classes = [w.strip() for w in classes]
@@ -127,25 +128,20 @@ def draw_annotation(event, x, y, flags, params):
     cv2.imshow(window_name, temp_frame)
     # if a rectangle is double clicked, the bounding box is deleted
     if event == cv2.EVENT_RBUTTONDBLCLK and not tracking:
-        delete_this = {}
+        delete_these = []
         # iterate over bounding boxes to identify the box selected
         for key, val in all_bounding_boxes.items():
-            deleted = False
             for i, v in enumerate(val):
                 x1, y1, x2, y2 = v
                 # check click condition
                 if x1 < x < x2 and y1 < y < y2:
-                    if key not in delete_this:
-                        delete_this[key] = []
-                    delete_this[key].append(i)
-                    deleted = True
-                    break
-            if deleted:
-                break
+                    delete_these.append([key, i, (y2 - y1) * (x2 - x1)])
+        # sort so that the smallest area item is selected
+        delete_these = sorted(delete_these, key=lambda inp: inp[2])
         # delete from dictionary separately as dictionary cannot be altered during a loop
-        for key, val in delete_this.items():
-            for i in val:
-                del all_bounding_boxes[key][i]
+        for key, i, _ in delete_these:
+            del all_bounding_boxes[key][i]
+            break
     # the dragging feature is enabled and the top xy coords of the image are added to a local variable
     if event == cv2.EVENT_LBUTTONDOWN and not tracking:
         print("recog lbutton down")
