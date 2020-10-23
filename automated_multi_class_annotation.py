@@ -54,7 +54,11 @@ small_thresh = args.small_object
 time_delay = args.frame_delay
 start_pos = args.start_frame
 skip_frames = args.skip_frames
-
+# warning if save_every%skip_frames != 0 then they may never coincide
+if save_every % skip_frames != 0 or save_counter%skip_frames!=0:
+    raise AssertionError("\n1. please make sure the skip_frames is a factorial of save_every_frame(n) to avoid errors while saving images\n"+
+                         "for example: n=10 and skip_frames=2 will work but n=10 and skip_frames=3 will not work very well\n"
+                         "2. Please make sure the skip_frames is a factorial of start_number(o)\n")
 # create the number of classes from command line arguments
 classes = args.classes.split(',')
 classes = [w.strip() for w in classes]
